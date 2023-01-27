@@ -1,0 +1,23 @@
+#leetcode
+
+class Solution:
+    def levelOrder(self, root: Optional[TreeNode]) -> List[List[int]]:
+        if root is None:
+            return []
+        L=queue.Queue(maxsize=0)
+        L.put(root)
+        k=[[root.val]]
+        while not L.empty():
+            l=[]
+            n=L.qsize()
+            for i in range(n):
+                curr=L.get()
+                if curr.left:
+                    L.put(curr.left)
+                    l.append(curr.left.val)
+                if curr.right:
+                    L.put(curr.right)
+                    l.append(curr.right.val)
+            if l:
+                k.append(l)
+        return k
