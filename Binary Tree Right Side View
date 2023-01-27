@@ -1,0 +1,21 @@
+#leetcode
+
+import queue
+class Solution:
+    def rightSideView(self, root: Optional[TreeNode]) -> List[int]:
+        if root is None:
+            return []
+        L=queue.Queue(maxsize=0)
+        L.put(root)
+        k=[]
+        while not L.empty():
+            n=L.qsize()
+            for i in range(n):
+                curr=L.get()
+                if i==n-1:
+                    k.append(curr.val)
+                if curr.left:
+                    L.put(curr.left)
+                if curr.right:
+                    L.put(curr.right)
+        return k
