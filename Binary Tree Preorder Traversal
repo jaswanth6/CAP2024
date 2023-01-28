@@ -1,0 +1,28 @@
+#leetcode
+
+class Solution:
+    def search(self,a,v):
+        low=0
+        high=len(a)-1
+        while (low<=high):
+            mid=(low+high)//2
+            if a[mid]==v:
+                return mid
+            elif a[mid]>v:
+                high=mid-1
+            else:
+                low=mid+1
+        return high
+
+    def findRadius(self, houses: List[int], heaters: List[int]) -> int:
+        maxi=0
+        heaters.sort()
+        for i in houses:
+            mini=float('inf')
+            indi=self.search(heaters,i)
+            if indi!=len(heaters)-1:
+                mini=min(abs(i-heaters[indi]),abs(i-heaters[indi+1]))
+            else:
+                mini=abs(i-heaters[indi])
+            maxi=max(mini,maxi)
+        return maxi
