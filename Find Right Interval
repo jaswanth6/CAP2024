@@ -1,0 +1,33 @@
+#leetcode
+
+class Solution:
+    def findRightInterval(self, intervals: List[List[int]]) -> List[int]:
+        if len(intervals)==1:
+            return [-1]
+        d={}
+        ind=[]
+        val=[]
+        l=[]
+        for i in range(len(intervals)):
+            d[intervals[i][0]]=i
+        for i in intervals:
+            ind.append(i[0])
+            val.append(i[1])
+        ind.sort()
+        for i in val:
+            low=0
+            high=len(intervals)-1
+            indi=-1
+            mini=float('inf')
+            while (low<=high):
+                mid=(low+high)//2
+                if ind[mid]>=i:
+                    indi=mid
+                    high=mid-1
+                else:
+                    low=mid+1
+            if indi==-1:
+                l.append(indi)
+            else:
+                l.append(d[ind[indi]])
+        return l
