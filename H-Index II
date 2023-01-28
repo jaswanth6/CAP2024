@@ -1,0 +1,25 @@
+#Leetcode
+
+class Solution:
+    def midd(self,a,v,n):
+        low=0
+        high=n
+        while low<=high:
+            mid=(low+high)//2
+            if a[mid]>=v:
+                high=mid-1
+            else:
+                low=mid+1
+        return low
+    def hIndex(self, citations: List[int]) -> int:
+        n=len(citations)
+        low=0
+        high=citations[-1]
+        while (low<=high):
+            mid=(low+high)//2
+            val=self.midd(citations,mid,n)
+            if (n-val)>=mid:
+                low=mid+1
+            else:
+                high=mid-1
+        return high
