@@ -1,28 +1,16 @@
 #leetcode
 
 class Solution:
-    def search(self,a,v):
-        low=0
-        high=len(a)-1
-        while (low<=high):
-            mid=(low+high)//2
-            if a[mid]==v:
-                return mid
-            elif a[mid]>v:
-                high=mid-1
-            else:
-                low=mid+1
-        return high
-
-    def findRadius(self, houses: List[int], heaters: List[int]) -> int:
-        maxi=0
-        heaters.sort()
-        for i in houses:
-            mini=float('inf')
-            indi=self.search(heaters,i)
-            if indi!=len(heaters)-1:
-                mini=min(abs(i-heaters[indi]),abs(i-heaters[indi+1]))
-            else:
-                mini=abs(i-heaters[indi])
-            maxi=max(mini,maxi)
-        return maxi
+    def __init__(self,l=[]):
+        self.l=[]
+    def postorderTraversals(self,root):
+        if root==None:
+            return
+        if root.left:
+            self.postorderTraversals(root.left)
+        if root.right:
+            self.postorderTraversals(root.right)
+        self.l.append(root.val)
+    def postorderTraversal(self, root: Optional[TreeNode]) -> List[int]:
+        self.postorderTraversals(root)
+        return self.l
