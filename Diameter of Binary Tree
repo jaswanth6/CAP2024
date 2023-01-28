@@ -1,0 +1,17 @@
+#leetcode
+
+class Solution:
+    def __init__(self,maxi=0):
+        self.maxi=0
+    def diameterOfBinaryTree(self, root: Optional[TreeNode]) -> int:
+        self.diameterOfBinaryTrees(root)
+        return self.maxi-1
+
+
+    def diameterOfBinaryTrees(self,root):
+        if root==None:
+            return 0
+        l=self.diameterOfBinaryTrees(root.left)
+        r=self.diameterOfBinaryTrees(root.right)
+        self.maxi=max(self.maxi,(l+r+1))
+        return max(l,r)+1
