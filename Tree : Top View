@@ -1,0 +1,24 @@
+#hackerrank
+import queue
+def topView(root):
+    #Write your code here
+    if root is None:
+        return
+    d={0:root.info}
+    L=queue.Queue(maxsize=0)
+    L.put((root,0))
+    while not L.empty():
+        for i in range(L.qsize()):
+            curr=L.get()
+            if curr[0].left:
+                L.put((curr[0].left,curr[1]-1))
+                if curr[1]-1 not in d:
+                    d[curr[1]-1]=curr[0].left.info
+            if curr[0].right:
+                L.put((curr[0].right,curr[1]+1))
+                if curr[1]+1 not in d:
+                    d[curr[1]+1]=curr[0].right.info
+    l=[]
+    for i in sorted(d):
+        l.append(d[i])
+    print(*l)
