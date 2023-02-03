@@ -1,0 +1,13 @@
+#leetcode
+class Solution:
+    def __init__(self):
+        self.l=[]
+    def kthSmallest(self, root: Optional[TreeNode], k: int) -> int:
+        def add(root):
+            if root is None:
+                return
+            add(root.left)
+            self.l.append(root.val)
+            add(root.right)
+        add(root)
+        return self.l[k-1]
