@@ -1,0 +1,12 @@
+#leetcode
+class Solution:
+    def __init__(self):
+        self.summ=0
+    def rangeSumBST(self, root: Optional[TreeNode], low: int, high: int) -> int:
+            if root is None:
+                return
+            if low<=root.val<=high:
+                self.summ+=root.val
+            self.rangeSumBST(self,root.left)
+            self.rangeSumBST(self,root.right)
+            return self.summ
