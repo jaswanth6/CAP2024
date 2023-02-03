@@ -1,0 +1,17 @@
+#leetcode
+class Solution:
+    def __init__(self):
+        self.l=[]
+    def getMinimumDifference(self, root: Optional[TreeNode]) -> int:
+        def heapp(root):
+            if root is None:
+                return
+            self.l.append(root.val)
+            heapp(root.left)
+            heapp(root.right)
+        heapp(root)
+        self.l.sort()
+        mini=float('inf')
+        for i in range(len(self.l)-1):
+            mini=min(self.l[i+1]-self.l[i],mini)
+        return mini
