@@ -1,0 +1,23 @@
+#leetcode
+class Solution:
+    def __init__(self):
+        self.d={}
+    def findMode(self, root: Optional[TreeNode]) -> List[int]:
+        def find(root):
+            if root is None:
+                return
+            if root.val in self.d:
+                self.d[root.val]+=1
+            else:
+                self.d[root.val]=1
+            find(root.left)
+            find(root.right)
+        find(root)
+        maxi=float('-inf')
+        for i in self.d.values():
+            maxi=max(i,maxi)
+        l=[]
+        for i in self.d:
+            if self.d[i]==maxi:
+                l.append(i)
+        return l
