@@ -1,0 +1,12 @@
+#leetcode
+class Solution:
+    def checkbst(self,root,mini,maxi):
+        if root is None:
+            return True
+        if mini<root.val<maxi:
+            l=self.checkbst(root.left,mini,root.val)
+            r=self.checkbst(root.right,root.val,maxi)
+            return l and r
+        return False
+    def isValidBST(self, root: Optional[TreeNode]) -> bool:
+        return self.checkbst(root,float('-inf'),float('inf'))
