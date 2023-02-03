@@ -1,0 +1,16 @@
+#leetcode
+class Solution:
+    def __init__(self):
+        self.l=[]
+    def getAllElements(self, root1: TreeNode, root2: TreeNode) -> List[int]:
+        def add(root):
+            if root is None:
+                return
+            add(root.left)
+            self.l.append(root.val)
+            add(root.right)
+            return self.l
+        add(root1)
+        add(root2)
+        self.l.sort()
+        return self.l
