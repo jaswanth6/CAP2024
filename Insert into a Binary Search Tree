@@ -1,0 +1,20 @@
+#leetcode
+class Solution:
+    def insertIntoBST(self, root: Optional[TreeNode], val: int) -> Optional[TreeNode]:
+        if root is None:
+            root=TreeNode(val)
+        p=root
+        t=TreeNode()
+        while p:
+            t=p
+            if val==p.val:
+                return p
+            elif val<p.val:
+                p=p.left
+            else:
+                p=p.right
+        if val<t.val:
+            t.left=TreeNode(val)
+        else:
+            t.right=TreeNode(val)
+        return root
