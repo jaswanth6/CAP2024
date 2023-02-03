@@ -1,0 +1,17 @@
+#hackerrank
+def decodeHuff(root, s):
+	#Enter Your Code Here
+    s1=''
+    curr=root
+    for i in s:
+        if i == '0':
+            curr=curr.left
+            if curr and not curr.left and not curr.right:
+                s1+=curr.data
+                curr=root
+        elif i=='1':
+            curr=curr.right
+            if curr and not curr.left and not curr.right:
+                s1+=curr.data
+                curr=root
+    print(s1)
