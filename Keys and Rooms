@@ -1,0 +1,17 @@
+#leetcode
+
+class Solution:
+    def canVisitAllRooms(self, rooms: List[List[int]]) -> bool:
+        visited=[False for i in range(len(rooms))]
+        visited[0]=True
+        def test(source):
+            nonlocal visited
+            for i in source:
+                if not visited[i]:
+                    visited[i]=True
+                    test(rooms[i])
+        test(rooms[0])
+        for i in visited:
+            if not i:
+                return False
+        return True
