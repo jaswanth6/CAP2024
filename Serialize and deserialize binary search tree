@@ -1,0 +1,57 @@
+#leetcode
+from collections import deque
+class Codec:
+
+    def serialize(self, root):
+        """Encodes a tree to a single string.
+        
+        :type root: TreeNode
+        :rtype: str
+        """
+        if root is None:
+            return ''
+        queue=deque()
+        queue.append(root)
+        s=str(root.val)
+        while queue:
+            for i in range(len(queue)):
+                curr=queue.popleft()
+                if curr.left:
+                    queue.append(curr.left)
+                    s+=','+str(curr.left.val)
+                else:
+                    s+=',#'
+                if curr.right:
+                    queue.append(curr.right)
+                    s+=','+str(curr.right.val)
+                else:
+                    s+=',#'
+        return s
+    def deserialize(self, data):
+        """Decodes your encoded data to tree.
+        
+        :type data: str
+        :rtype: TreeNode
+        """
+        if len(data)==0:
+            return None
+        l=data.split(',')
+        queue=deque()
+        root=TreeNode(int(l[0]))
+        queue.append(root)
+        i=1
+        while queue:
+            curr=queue.popleft()
+            if l[i]!='#':
+                curr.left=TreeNode(int(l[i]))
+                queue.append(curr.left)
+            else:
+                curr.left=None
+            i+=1
+            if l[i]!='#':
+                curr.right=TreeNode(int(l[i]))
+                queue.append(curr.right)
+            else:
+                curr.right=None
+            i+=1
+        return root
