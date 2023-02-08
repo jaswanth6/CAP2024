@@ -1,0 +1,14 @@
+#leetcode
+
+class Solution:
+    def bstToGst(self, root: TreeNode) -> TreeNode:
+        self.summ=0
+        def add(root):
+            if root is None:
+                return
+            add(root.right)
+            self.summ+=root.val
+            root.val=self.summ
+            add(root.left)
+        add(root)
+        return root
