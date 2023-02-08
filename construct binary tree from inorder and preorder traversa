@@ -1,0 +1,17 @@
+#leetcode
+
+class Solution:
+    def buildTree(self, preorder: List[int], inorder: List[int]) -> TreeNode:
+        d={inorder[i]:i for i in range(len(inorder))}
+        def build(low,up):
+            nonlocal index
+            if low>up:
+                return None
+            root_val=preorder[index]
+            root=TreeNode(root_val)
+            index+=1
+            root.left=build(low,d[root_val]-1)
+            root.right=build(d[root_val]+1,up)
+            return root
+        index=0
+        return build(0,len(inorder)-1)
