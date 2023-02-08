@@ -1,0 +1,23 @@
+#leetcode
+
+from collections import deque
+class Solution:
+    def findCircleNum(self, l: List[List[int]]) -> int:
+        visited=[False for i in range(len(l))]
+        adjL=[[] for i in range(len(l))]
+        for i in range(len(l)):
+            for j in range(len(l)):
+                if l[i][j]==1 and i!=j:
+                    adjL[i].append(j)
+                    adjL[j].append(i)
+        def dfs(source):
+            visited[source]=True
+            for i in adjL[source]:
+                if not visited[i]:
+                    dfs(i)
+        c=0
+        for source in range(len(l)):
+            if not visited[source]:
+                dfs(source)
+                c+=1
+        return c
