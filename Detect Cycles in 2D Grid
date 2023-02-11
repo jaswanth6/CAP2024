@@ -1,0 +1,26 @@
+#leetcode
+
+from collections import deque
+class Solution:
+    def containsCycle(self, grid: List[List[str]]) -> bool:
+        visited=[[False for i in range(len(grid[0]))] for j in range(len(grid))]
+        queue=deque()
+        rlist=[0,1,-1,0]
+        clist=[1,0,0,-1]
+        for row in range(len(grid)):
+            for col in range(len(grid[0])):
+                if not visited[row][col]:
+                    queue.append((row,col,-1,-1))
+                    visited[row][col]=True
+                    while queue:
+                        for i in range(len(queue)):
+                            curr=queue.popleft()
+                            for j in range(4):
+                                newrow=curr[0]+rlist[j]
+                                newcol=curr[1]+clist[j]
+                                if newrow>=0 and newrow<len(grid) and newcol>=0 and newcol<len(grid[0]) and (curr[2]!=newrow or curr[3]!=newcol) and grid[newrow][newcol]==grid[row][col]:
+                                    if visited[newrow][newcol]:
+                                        return True
+                                    queue.append((newrow,newcol,curr[0],curr[1]))
+                                    visited[newrow][newcol]=True
+        return False
